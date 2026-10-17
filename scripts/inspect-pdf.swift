@@ -1,4 +1,4 @@
-// Local read-only source inspection. Generated page images/OCR belong in tmp/pdfs/.
+// Local read-only source inspection. Generated page images/OCR belong in .local/checks/pdfs/.
 import Foundation
 import PDFKit
 import AppKit

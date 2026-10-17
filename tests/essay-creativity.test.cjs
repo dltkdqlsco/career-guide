@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-7';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'creative improvement question / role / limit',limitation:'messages lacked reproduction inputs; more logs alone do not help',idea:'replace free text with minimal reproduction card, existing document tool',actions:'make template, pilot same 5 cases, remove excess fields after feedback',results:'missing required info 3 of 5 -> 0 of 5, same rubric; PILOT ONLY; time UNMEASURED',draft:'old limitation, new framing, my implementation, validation, scope and learning',review:'confirmed'});

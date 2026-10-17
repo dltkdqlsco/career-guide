@@ -24,7 +24,7 @@ function boot({height=3000,y=1200,viewport=800}={}){
   };
   context.window=context;
   vm.createContext(context);
-  vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/viewport.js'),'utf8'),context);
+  vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/assets/js/viewport.js'),'utf8'),context);
   return {api:context.Viewport,context,main,scrolls,clamps,
     setContent(height){contentHeight=height;clamp();},
     nativeScroll(x,y){scrollX=x;scrollY=y;clamp();},

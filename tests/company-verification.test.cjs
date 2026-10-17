@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id=w.verificationId;
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const card=(verdict='confirmed')=>({...Object.fromEntries(w.verificationFields.filter(([key])=>key!=='verdict').map(([key])=>[key,`내 기록 ${key}\n한글 😀`])),verdict});

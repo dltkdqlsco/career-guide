@@ -1,9 +1,9 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window={};
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');
 global.Workbook=window.Workbook;
-require('../dist/backup-core.js');
+require('../dist/assets/js/backup-core.js');
 const b=window.RecordBackup;
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const wrap=data=>JSON.stringify({format:b.format,version:b.version,exportedAt:'2026-10-15T00:00:00Z',data});

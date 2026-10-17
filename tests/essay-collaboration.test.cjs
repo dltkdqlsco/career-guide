@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-6';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'collaboration question / role / limit',context:'my full-change proposal; teammate raised deadline and existing-work concern',criteria:'schedule and scope jointly compared using response samples',actions:'listen, compare, revise my proposal, agree minimum scope, implement my API and document',results:'joint integration checked; extra fields DEFERRED; trust UNMEASURED; record and learning',draft:'common goal, concerns, criteria, my adjustment, joint outcome and learning',review:'confirmed'});

@@ -202,7 +202,7 @@ test('static assets contain no model/network calls, microphone capture or remote
   }
   const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
   assert.doesNotMatch(html,/(?:src|href)=["']https?:/);
-  const css=fs.readFileSync(path.join(dist,'style.css'),'utf8');
+  const css=fs.readFileSync(path.join(dist,'assets/css/style.css'),'utf8');
   assert.doesNotMatch(css,/@import|url\(\s*["']?https?:/);
 });
 

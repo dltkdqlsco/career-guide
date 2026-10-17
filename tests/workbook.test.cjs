@@ -1,6 +1,6 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-global.window={};require('../dist/career-data.js');require('../dist/workbook.js');
+global.window={};require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');
 const w=window.Workbook;
 test('empty inputs produce no invented background or achievements',()=>{
   assert.equal(w.compose({}),'');

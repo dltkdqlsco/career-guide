@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-2';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'question and actual experience',star:'personal actions and observed result',kpi:'not measured; regression test record',fab:'evidence and contribution plan',outline:'STAR first; omit future plan for this question',review:'confirmed'});

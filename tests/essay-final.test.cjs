@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-9',checks=CareerLessons.lessons[id].checklist;
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'q / role / actual submission limit',manuscript:'before checking',evidence:'verified code and posting; actual form limit and deadline',fixes:'replaced generic learning; checked record and form',finalText:'final text only',review:'confirmed',...Object.fromEntries(checks.map(([key])=>[key,'confirmed']))});

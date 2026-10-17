@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='3-2';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({target:'junior backend / SQL required / prioritize core and supporting tech',inventory:'SQL documented independent query fix; Java guided API; Git guided branches; Docker teammate only',criteria:'1 tutorial, 2 guided, 3 independent with docs, 4 lead, 5 review/mentor; unknown != beginner; importance separate',assessment:'SQL core importance5 proficiency3 with code/tests; Java core4/2; Git supporting3/2; Docker UNKNOWN',presentation:'Legend: stars importance, blocks proficiency; SQL 5/5 and 3/5 intermediate with evidence; Docker excluded',gaps:'No direct Docker evidence; gather actual tasks before rating; no production or performance claim',review:'confirmed'});

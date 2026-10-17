@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
 const context={};context.window=context;vm.createContext(context);
-for(const file of ['curriculum.js','career-data.js','workbook.js','finder.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist',file),'utf8'),context,{filename:file});
+for(const file of ['curriculum.js','career-data.js','workbook.js','finder.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/assets/js',file),'utf8'),context,{filename:file});
 const finder=context.StepFinder;
 const ids=rows=>Array.from(rows,row=>row.step.id);
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});

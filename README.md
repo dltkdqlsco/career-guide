@@ -35,13 +35,13 @@ python3 -m http.server 4175 --bind 127.0.0.1 --directory dist
 
 ## 검증과 문서
 
-전체 자동 검사 **462개**, JavaScript **18개** 문법 검사를 통과했습니다. 전체 목차 화면, 모바일 배치, 모드 선택과 기록 보존, 단계별 작성·복사·백업·복원을 검증했습니다. 구체적인 범위와 미검증 항목은 [문서 목차](dist/output/md_file/README.md)와 각 보고서를 확인하세요.
+전체 자동 검사 **462개**, JavaScript **18개** 문법 검사를 통과했습니다. 전체 목차 화면, 모바일 배치, 모드 선택과 기록 보존, 단계별 작성·복사·백업·복원을 검증했습니다. 추가로 Chromium의 데스크톱·터치 세로/가로·로컬 파일 직접 실행에서 입력·저장·백업·복원을 확인했습니다. Safari는 원격 자동화 비활성화로 실행하지 못했으며, 실제 휴대전화·OS 한글 입력기는 미검증입니다. [최종 사용성 추가 검증](resources/md/reviews/final-usability-review.md)을 확인하세요. PDF 5종·128쪽과 45개 목차의 핵심 내용도 대조해 안내 2곳을 보완했습니다. [전체 PDF 내용 대조 보고서](resources/md/reviews/full-pdf-content-audit.md)에 원문과 다른 처리·미확인 범위를 기록했습니다. 구체적인 범위와 미검증 항목은 [문서 목차](resources/md/README.md)와 각 보고서를 확인하세요.
 
 ```sh
 node --test tests/*.test.cjs
 ```
 
-새 Markdown 문서와 보고서는 **`dist/output/md_file/`에 저장**합니다. 초기 검토안도 이 폴더에 모았으며 과거 보고서의 검사 수·보류 표시는 당시 기록으로 유지합니다.
+새 Markdown 문서와 보고서는 **`resources/md/`에 저장**합니다. 초기 검토안도 이 폴더에 모았으며 과거 보고서의 검사 수·보류 표시는 당시 기록으로 유지합니다.
 
 ## 남은 작업
 
@@ -53,9 +53,32 @@ node --test tests/*.test.cjs
 
 ## 파일 구성
 
-- `dist/`: 정적 웹 소스와 문서. `dist/company-research-review.html`은 현재 워크북과 별개인 **초기 검토 화면**입니다.
-- `tests/`: 자동 회귀 검사.
-- `scripts/inspect-pdf.swift`: 로컬 PDF 읽기·페이지 렌더링 보조 도구.
-- `.openai/hosting.json`: 기존 사이트 연결 설정. 인증키를 포함하지 않습니다.
+```text
+career-guide/
+├── dist/                         웹 실행·배포 파일
+│   ├── index.html                워크북 실행 진입점
+│   └── assets/
+│       ├── js/                   JavaScript 18개
+│       └── css/                  본문·화면 모드 스타일
+├── resources/                    기존 output: 참고 자료·문서
+│   ├── md/                       작업 문서 목차와 주제별 Markdown
+│   │   ├── ai/                   AI 활용법
+│   │   ├── company/              기업 분석
+│   │   ├── essay/                자기소개서
+│   │   ├── portfolio/            IT 포트폴리오
+│   │   ├── interview/            면접
+│   │   ├── ui/                   글자 크기·화면 모드
+│   │   ├── reviews/              통합 검사·원문 대조·정리 보고서
+│   │   └── archive/              초기 검토안·과거 프로젝트 기록
+│   ├── pdf/                      번호순 원문 PDF 5종 · Git 제외
+│   └── archives/                 원본 ZIP · Git 제외
+│       └── review/               초기 HTML·CSS 검토 화면
+├── tests/                        자동 회귀 검사
+├── scripts/                      PDF 검사 등 보조 도구
+├── .local/                       임시 검증 코드·렌더·로그 · Git 제외
+└── .openai/hosting.json          기존 사이트 연결 설정
+```
+
+새 Markdown 문서는 `resources/md/`의 해당 주제 폴더에 저장하고 [문서 목차](resources/md/README.md)에 연결합니다. 파일 정리 내역은 [정리 보고서](resources/md/reviews/file-organization.md)를 참고하세요.
 
 원문 PDF·압축 파일, 임시 브라우저 검사·로그·캐시, 환경변수·인증키는 `.gitignore`에서 제외합니다. JSON 백업 등 개인 작성 기록은 저장소에 추가하지 않습니다.

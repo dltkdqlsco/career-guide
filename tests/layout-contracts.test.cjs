@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 
 // Source-level CSS guards only; these do not measure browser layout or zoom.
-const css=fs.readFileSync(path.join(__dirname,'../dist/style.css'),'utf8');
+const css=fs.readFileSync(path.join(__dirname,'../dist/assets/css/style.css'),'utf8');
 const stability=css.slice(css.indexOf('/* Writing/TOC stability:'));
 
 test('writing grids allow their contents to shrink instead of forcing horizontal overflow',()=>{

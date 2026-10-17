@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-1';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'문항·공고 근거',candidates:'실제 후보와 증거',selected:'대표 경험·선택 이유',keywords:'행동 근거·직무 연결',review:'confirmed'});

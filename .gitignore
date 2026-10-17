@@ -24,11 +24,11 @@ coverage/
 playwright-report/
 test-results/
 *.log
-/dist/tmp/
+/.local/
 
 # Local source documents and archive
-/dist/pdf.zip
-/dist/output/pdf/
+/resources/pdf/
+/resources/archives/*.zip
 
 # Editor temporary files
 *.swp

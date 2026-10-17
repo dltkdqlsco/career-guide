@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='1-8';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({target:'내 기업·직무',requirements:'공고 원문 / 출처 / 확인일',experience:'실제 경험·근거',matches:'연결 근거',gaps:'부족한 경험·다음 행동',review:'confirmed'});

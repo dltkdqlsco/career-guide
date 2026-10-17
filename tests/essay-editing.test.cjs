@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-8';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'question, role and 700-char limit',before:'my untouched draft',evidence:'my API action and test logs; speed UNMEASURED',focus:'clarify role, actual diagnosis, sentence flow',changes:'remove exaggerated claim; reject invented metrics',revised:'my verified, readable revision',review:'confirmed'});

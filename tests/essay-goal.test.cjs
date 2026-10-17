@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 global.window=global;
-require('../dist/curriculum.js');require('../dist/career-data.js');require('../dist/workbook.js');require('../dist/backup-core.js');require('../dist/finder.js');
+require('../dist/assets/js/curriculum.js');require('../dist/assets/js/career-data.js');require('../dist/assets/js/workbook.js');require('../dist/assets/js/backup-core.js');require('../dist/assets/js/finder.js');
 const w=Workbook,b=RecordBackup,id='2-5';
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 const filled=()=>({question:'goal question / actual experience / limit',goal:'baseline 20 min; target <=10 min set before work; same fixture; 3-run mean',strategy:'fix checklist, implement script, compare, add missing check',results:'actual 8 min; same 10 scenarios and machine; timer logs',learning:'maintain scope and measurement criteria; future application',draft:'my goal, strategy, adjustments, result and learning',review:'confirmed'});

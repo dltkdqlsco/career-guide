@@ -1,0 +1,38 @@
+/* Appearance controls do not change the workbook's reading sizes. */
+:root{color-scheme:light}
+.theme-picker{display:flex;align-items:center;gap:6px;flex-shrink:0}
+#theme-select{font:inherit;font-size:12px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px;max-width:100%;cursor:pointer}
+#theme-select:focus-visible{outline:3px solid #76ab8e;outline-offset:3px}
+.header-main{height:auto;min-height:87px;padding:14px 0;flex-wrap:wrap}
+.header-actions{flex-wrap:wrap;gap:12px}
+html[data-theme=dark]{color-scheme:dark;--bg:#101923;--paper:#172432;--ink:#e1edf6;--muted:#adc3d5;--green:#8bcdf7;--line:#344d61;--mint:#21394e;--shadow:0 4px 18px #0003}
+html[data-theme=dark] body{background:var(--bg);color:var(--ink)}
+html[data-theme=dark] :is(.site-header,.sidebar,.panel,.course-card,.steps-panel,.lesson-card,.finder-entry,.finder-toolbar,.finder-group,.backup-summary,.backup-card,.restore-panel,.restore-record,.example-case,.saved-note,.skip){background:var(--paper);border-color:var(--line)}
+html[data-theme=dark] :is(.topbar,.hero,.note-panel,.local-workflow,.output-panel,.example-block,.skill-reference,.prompt-reference,.tip-box,.fact-card,.check-note,.adapt-note,.local-mode-notice,.research-empty,.field-example,.finder-empty){background:#1b3042;border-color:var(--line)}
+html[data-theme=dark] .hero{background:linear-gradient(110deg,#1a354a,#1c2b3c)}
+html[data-theme=dark] :is(.stage-card,.comparison article,.weak-prompt,.comparison .before,.comparison .after,.restore-comparison>section,.metric-comparison div,.local-workflow li,.local-workflow li[aria-current=step],.company-reference-text,.example-fields dt,.workspace,.paper,.verification-request){background:#203447;border-color:var(--line)}
+html[data-theme=dark] :is(.example-case[open]>summary,.restore-record[open]>summary,.finder-group-heading,.skill-example thead){background:#233c52;border-color:var(--line)}
+html[data-theme=dark] :is(textarea,.field-block textarea,.output-panel textarea,.prompt-reference textarea,input[type=search],input[type=file],select,#analysis-question,[data-verification-field=verdict],.finder-entry input,.finder-toolbar input[type=search],.finder-toolbar select,.backup-card input[type=file]){background:#122131;color:var(--ink);border-color:#52708a}
+html[data-theme=dark] textarea::placeholder,html[data-theme=dark] input::placeholder{color:#91aabd}
+html[data-theme=dark] :is(h1,h2,h3,h4,.hero h2,.course-copy h3,.field-block label,.research-card-heading h4,.example-fields dt,.instruction-list li,.research-paths ol,.research-directory dt,.final-checks label,.complete-control){color:var(--ink)}
+html[data-theme=dark] :is(p,.tab-content p,.tiny,.helper,.eyebrow,.lesson-intro,.course-copy p,.course-meta,.progress-detail,.progress-detail strong,.course-copy .label,.note-panel p,.ring-text small,.stage-card dd,.stage-card dt,.instruction-list p,.research-directory dd,.finder-help,.finder-legend,.finder-section,.finder-group-heading>span,.finder-results-heading p,.saved-note pre,.example-fields dd,.example-block pre,.field-example pre,.field-example p,.field-example small,.field-example .mini-label,.comparison p,.comparison small,.restore-comparison pre,.restore-counts span,.backup-summary span,.backup-card p,.restore-panel>p,.local-mode-notice p,.review-banner,.footer,.back-link,.save-status,.textarea-meta,.required-text,.metric-comparison dt,.skill-example caption,.date-pill,.steps-panel summary .tiny){color:var(--muted)}
+html[data-theme=dark] :is(.nav-item,.tab,.step-item,.text-button,.source-link,.case-no,.field-number,.finder-step-number,.finder-result-action,.full-prompt>summary,.field-example>summary,.case-body h4,.stage-index,.metric-comparison dd){color:#9ed5f7}
+html[data-theme=dark] :is(.nav-item.active,.nav-item:hover,.step-item.active,.step-item:hover,.finder-result:hover,.header-actions a[aria-current=page]){background:#26435b;color:#d0ecff;border-color:#70b8e6}
+html[data-theme=dark] .tab[aria-selected=true]{color:#b7e2ff;border-bottom-color:#8acdf7}
+html[data-theme=dark] :is(.badge,.badge.pending,.badge.progress-not-started,.badge.progress-in-progress,.badge.progress-done,.restore-counts span,.avatar){background:#2a455d;color:#d3e8f8}
+html[data-theme=dark] :is(.primary,.step-item.done .step-num){background:#2479ac;border-color:#6bb4e0;color:#fff}
+html[data-theme=dark] .primary:hover{background:#1f6794}
+html[data-theme=dark] :is(.secondary,.icon-button,.step-num){background:#21374a;color:var(--ink);border-color:#56728a}
+html[data-theme=dark] .review-banner{background:#302e25;border-color:#605945}
+html[data-theme=dark] :is(.progress-track,.paper-line){background:#2b455a}
+html[data-theme=dark] .progress-ring{background:conic-gradient(#58afe1 var(--progress),#30465a 0)}
+html[data-theme=dark] .progress-ring:before{background:var(--paper)}
+html[data-theme=dark] :is(.brand small,.topbar #breadcrumb){color:var(--muted)}
+html[data-theme=dark] .preview-label{color:#bad9ee;border-color:var(--line)}
+html[data-theme=dark] :is(.example-fields>div,.finder-list>li+li,.skill-example th,.skill-example td,.research-directory>div,.final-checks,.step-grid,.fine-divider,.next-action,.analysis-section,.prompt-group,.tabs){border-color:var(--line)}
+html[data-theme=dark] .backup-card input::file-selector-button{background:#263f54;color:var(--ink);border-color:#56728a}
+html[data-theme=dark] :is(.research-source-note,.backup-feedback){background:#1b3042;color:var(--ink)!important}
+html[data-theme=dark] .toast{background:#c2e4fa;color:#122131}
+@media(max-width:690px){.header-main{min-height:76px;gap:12px}.header-actions{gap:8px}#theme-select{font-size:12px;padding:7px}.theme-picker{max-width:100%}}
+html[data-theme=dark] .tip-box{color:var(--muted)}
+html[data-theme=dark] .tip-box strong{color:var(--ink)}

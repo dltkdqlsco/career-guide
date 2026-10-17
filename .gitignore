@@ -1,0 +1,36 @@
+# macOS metadata
+.DS_Store
+._*
+
+# Local secrets (keep shareable examples)
+.env
+.env.*
+!.env.example
+!.env.*.example
+/.aws/
+*.pem
+*.key
+
+# Dependencies and caches
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+coverage/
+
+# Temporary browser checks and logs
+.playwright-mcp/
+playwright-report/
+test-results/
+*.log
+/dist/tmp/
+
+# Local source documents and archive
+/dist/pdf.zip
+/dist/output/pdf/
+
+# Editor temporary files
+*.swp
+*.swo
+*~

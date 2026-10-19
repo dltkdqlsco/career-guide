@@ -8,13 +8,14 @@ const schemas={
  '0-4':['target','data','metrics','chart','interpretation','status'],
  '0-5':['target','materials','protocol','session','feedback','plan']
 };
+const required={'0-3':['target','materials','instructions'],'0-4':['target','data','metrics','chart'],'0-5':['target','materials','protocol']};
 const empty=()=>({notes:{},worksheets:{},done:{},last:null});
 for(const [id,keys] of Object.entries(schemas)){
  test(`${id} needs all records and review, supports honest unexecuted preparation and no example autofill`,()=>{
   const lesson=CareerLessons.lessons[id],example=Object.fromEntries(lesson.fields.map(f=>[f[0],f[3]]));example.review='confirmed';
-  assert.equal(w.has(id),true);assert.equal(StepFinder.availability(id),'ready');assert.deepEqual(w.requiredFields(id).map(f=>f[0]),[...keys,'review']);
-  assert.equal(w.validate(id,example),'');for(const key of [...keys,'review'])assert.notEqual(w.validate(id,{...example,[key]:''}),'');
-  assert.match(example.status||example.session,/미실행|아직 하지 않음/);assert.equal(w.compose({},id),'');assert.equal(w.exportText(id,{}),'');
+  assert.equal(w.has(id),true);assert.equal(StepFinder.availability(id),'ready');assert.deepEqual(w.requiredFields(id).map(f=>f[0]),[...required[id],'review']);
+  assert.equal(w.validate(id,example),'');for(const key of [...required[id],'review'])assert.notEqual(w.validate(id,{...example,[key]:''}),'');
+  assert.match(example.status||example.session,/미실행|아직 하지 않음/);for(const key of keys.filter(k=>!required[id].includes(k)))assert.equal(w.validate(id,{...example,[key]:''}),'');assert.equal(w.compose({},id),'');assert.equal(w.exportText(id,{}),'');
   for(const ref of lesson.refs)assert.equal(w.has(ref),true);
  });
  test(`${id} composes only chosen evidence and protects independent outputs, raw answers and blank/manual requests`,()=>{

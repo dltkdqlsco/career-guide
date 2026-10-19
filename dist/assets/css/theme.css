@@ -36,3 +36,7 @@ html[data-theme=dark] .toast{background:#c2e4fa;color:#122131}
 @media(max-width:690px){.header-main{min-height:76px;gap:12px}.header-actions{gap:8px}#theme-select{font-size:12px;padding:7px}.theme-picker{max-width:100%}}
 html[data-theme=dark] .tip-box{color:var(--muted)}
 html[data-theme=dark] .tip-box strong{color:var(--ink)}
+html[data-theme=dark] :is(.course-shortcuts,.course-jump){background:var(--paper);border-color:var(--line)}
+html[data-theme=dark] :is(.choice-control input,.choice-control select,.course-jump select){background:#122131;color:var(--ink);border-color:#52708a}
+html[data-theme=dark] .choice-tags li{background:#26435b;color:var(--ink)}
+html[data-theme=dark] :is(.shortcut-item.active,.shortcut-item:hover){background:#26435b;color:#d0ecff}

@@ -90,6 +90,8 @@ function boot(saved){
     clickLink(href,options={}){
       const link=node(`link:${href}`);link.setAttribute('href',href);link.target=options.target||'';
       if(options.download)link.setAttribute('download','');else link.removeAttribute('download');
+      if(options.category)link.setAttribute('data-nav','category');else link.removeAttribute('data-nav');
+      link.classList.toggle('course-card',Boolean(options.courseCard));
       const event={button:0,defaultPrevented:false,...options,target:{closest:()=>link},preventDefault(){this.defaultPrevented=true;}};
       documentEvents.click(event);return event;
     },
@@ -549,7 +551,7 @@ test('same-step route changes only the tab and synchronizes its URL without addi
   assert.equal(app.node('#tab-content').htmlWrites,writes);
 });
 
-test('changing steps reuses the course shell and expanded TOC without scrolling to the new lesson',()=>{
+test('changing routes keeps the always-open course shell mounted',()=>{
   const app=boot();app.route('#course/ai/0');
   app.node('.steps-panel').open=true;
   const main=app.node('#main').htmlWrites,lesson=app.node('#lesson-host').htmlWrites,scrolls=app.scrolls.length;
@@ -558,7 +560,7 @@ test('changing steps reuses the course shell and expanded TOC without scrolling 
   assert.equal(app.node('.steps-panel').open,true);assert.equal(app.node('#mobile-step').value,'1');
   assert.equal(app.node('step:#course/ai/0').attributes['aria-current'],undefined);
   assert.equal(app.node('step:#course/ai/1').attributes['aria-current'],'step');
-  assert.match(app.node('.steps-panel summary .tiny').textContent,/2번째 단계/);
+  assert.match(app.node('#steps-progress').textContent,/2번째 단계/);
   assert.equal(app.scrolls.length,scrolls);assert.equal(app.node('#lesson-host').scrolls.length,0);
   assert.equal(app.node('#lesson-host').focusOptions.preventScroll,true);
   app.node('#prev').onclick();assert.equal(app.context.location.hash,'#course/ai/0/guide');
@@ -817,12 +819,12 @@ test('tab button restores the exact pre-click position even if node exchange mov
   app.node('#tab-write').onclick();assert.equal(app.context.scrollY,1900);
 });
 
-test('previous-step button and step selector keep the current viewport with no hashchange roundtrip',()=>{
+test('previous-step button and step selector reveal the new lesson with no hashchange roundtrip',()=>{
   const app=boot();app.route('#course/ai/2/write');app.context.scrollY=1700;
   app.node('#prev').onclick();assert.equal(app.run('currentStep.id'),'0-1');assert.equal(app.context.scrollY,1700);
   app.node('#mobile-step').onchange({target:{value:'4'}});
   assert.equal(app.run('currentStep.id'),'0-4');assert.equal(app.context.scrollY,1700);
-  assert.equal(app.node('#lesson-host').scrolls.length,0);
+  assert.equal(app.node('#lesson-host').scrolls.length,2);
 });
 
 test('opening and closing TOC/examples keeps the viewport and leaves modified clicks native',()=>{
@@ -884,8 +886,8 @@ test('company first three lessons provide original guidance and examples without
       assert.doesNotMatch(app.node('#lesson-host').innerHTML,/캡처|PDF|보완 가이드/);
       assert.doesNotMatch(html,/이 단계의 핵심 설명이 들어갑니다/);
       if(tab==='example'){
-        assert.equal((html.match(/class="example-case"/g)||[]).length,index===1?3:2);
-        assert.match(html,/학습용 가상/);
+        assert.equal((html.match(/class="example-case"/g)||[]).length,1);
+        assert.match(html,/학습용 요청문과 사례/);
       }
       if(tab==='write'){
         assert.equal((html.match(/data-field="/g)||[]).length,index===2?6:4);
@@ -979,9 +981,9 @@ test('company JSON export and selective restore retain all forms, old notes, man
 test('research lesson retains useful routes and fictional examples without production notes',()=>{
   const app=boot();app.route('#course/company/3/guide');
   const guide=app.node('#tab-content').innerHTML;
-  for(const text of ['DartPoint AI','한경컨센서스','비상장기업','TheVC','스타트업 위클리','KIND'])assert.ok(guide.includes(text));
+  for(const text of ['DART','DartPoint AI','한경컨센서스','비상장기업','TheVC','스타트업 위클리','삼성전자 C-Lab'])assert.ok(guide.includes(text));
   assert.doesNotMatch(guide,/PDF [0-9]|원문에서|원문의 같은|보완 제안/);
-  app.route('#course/company/3/example');assert.equal((app.node('#tab-content').innerHTML.match(/class="example-case"/g)||[]).length,2);
+  app.route('#course/company/3/example');assert.equal((app.node('#tab-content').innerHTML.match(/class="example-case"/g)||[]).length,1);
   app.route('#course/company/3/write');assert.equal(app.run("Workbook.sourceCards(state.worksheets['1-3']).length"),0);
 });
 
@@ -1001,7 +1003,7 @@ test('research cards enforce completion, preserve other records and confirm remo
   const data=blankState();data.notes['1-3']='이전 메모';data.worksheets['1-2']={custom:'수동 지침'};
   const app=boot(data);app.route('#course/company/3/write');const check=app.node('#complete');check.checked=true;check.onchange({target:check});assert.equal(check.checked,false);
   app.node('#add-source-card').onclick();
-  for(const [key] of app.context.Workbook.sourceFields){const input=app.node(`#source-0-${key}`);input.value='내 '+key;input.oninput({target:input});}
+  for(const [key] of app.context.Workbook.sourceFields.filter(([key])=>!app.context.PDFContent.hidden('1-3',key))){const input=app.node(`#source-0-${key}`);input.value='내 '+key;input.oninput({target:input});}
   check.checked=true;check.onchange({target:check});assert.equal(app.saved().done['1-3'],true);
   const input=app.node('#source-0-target');input.value='수정 기업';input.oninput({target:input});assert.equal(app.saved().done['1-3'],false);
   app.node('#add-source-card').onclick();assert.equal(app.saved().worksheets['1-3'].cards.length,2);
@@ -1090,7 +1092,7 @@ test('verification unchanged input after storage failure retries without discard
 test('posting guidance/examples never populate fields and references show only selected verified sentences',()=>{
   const data=blankState();data.notes['1-6']='기존 공고 메모';data.worksheets['1-5']={cards:[verificationTestCard(),{...verificationTestCard('unverified'),final:'불확실한 문장숨김'}]};data.worksheets['1-0']={target:'목표 </pre><script>bad()</script>'};const app=boot(data);
   for(const tab of ['guide','example','write'])app.route(`#course/company/6/${tab}`);
-  const html=app.node('#tab-content').innerHTML;assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>|불확실한 문장숨김/);assert.match(html,/대조한 최종 문장/);assert.equal((html.match(/data-field="/g)||[]).length,11);assert.deepEqual(app.saved().worksheets['1-6'],{});assert.equal(app.saved().notes['1-6'],'기존 공고 메모');
+  const html=app.node('#tab-content').innerHTML;assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>|불확실한 문장숨김/);assert.match(html,/대조한 최종 문장/);assert.equal((html.match(/data-field="/g)||[]).length,10);assert.doesNotMatch(html,/id="field-source"/);assert.deepEqual(app.saved().worksheets['1-6'],{});assert.equal(app.saved().notes['1-6'],'기존 공고 메모');
 });
 test('posting typing saves IME immediately and defers combined preview without replacing the form',()=>{
   const app=boot();app.route('#course/company/6/write');const input=app.node('[data-field=original]'),record=app.node('#company-record'),before=renderCounts(app);
@@ -1641,7 +1643,7 @@ test('mock interview tool labels and evaluation tables escape source text; trans
 
 for(const index of [3,4,5])test(`AI external ${index+1} renders every tab with safe tool links and preserves legacy notes`,()=>{
  const id=`0-${index}`,data=blankState();data.notes[id]='legacy external note';data.worksheets['0-1']={target:'protected first prompt',custom:''};const app=boot(data);
- for(const tab of ['guide','example','write']){app.route(`#course/ai/${index}/${tab}`);const html=app.node('#tab-content').innerHTML;assert.match(html,/미실행·미수신/);assert.match(html,/target="_blank" rel="noopener noreferrer"/);assert.doesNotMatch(html,/<iframe|<video|<audio|<script>/);if(tab==='write'){assert.equal((html.match(/data-field="/g)||[]).length,7);assert.match(html,/legacy external note/);assert.match(html,/id="copy-career-final"/);}}
+ for(const tab of ['guide','example','write']){app.route(`#course/ai/${index}/${tab}`);const html=app.node('#tab-content').innerHTML;if(tab==='guide')assert.match(html,/선택 사항/);if(tab==='write')assert.match(html,/실행한 결과 가져와 기록하기 · 선택/);if(tab!=='example')assert.match(html,/target="_blank" rel="noopener noreferrer"/);assert.doesNotMatch(html,/<iframe|<video|<audio|<script>/);if(tab==='write'){assert.equal((html.match(/data-field="/g)||[]).length,7);assert.match(html,/legacy external note/);assert.match(html,/id="copy-career-final"/);}}
  assert.equal(app.saved().notes[id],'legacy external note');assert.equal(app.saved().worksheets['0-1'].target,'protected first prompt');
 });
 
@@ -1649,9 +1651,119 @@ test('home availability follows the complete curriculum and finder explains exte
  const app=boot();assert.match(app.node('#main').innerHTML,/5개 가이드의 45개 단계/);assert.doesNotMatch(app.node('#main').innerHTML,/AI 활용법 1–3단계와 기업 분석 1–9단계/);app.route('#find');assert.match(app.node('#main').innerHTML,/외부 도구의 실제 실행 여부/);assert.doesNotMatch(app.node('#main').innerHTML,/준비 중 항목에서도/);
 });
 
-test('company source recheck exposes six copyable accuracy rules and the three tool candidates without source-process wording',async()=>{
+test('company source recheck exposes copyable accuracy rules and the three tool candidates without source-process wording',async()=>{
  const app=boot();app.route('#course/company/0/guide');assert.match(app.node('#tab-content').innerHTML,/할루시네이션/);assert.match(app.node('#tab-content').innerHTML,/정확성이 보장되는 것은 아니/);await app.node('#copy-company-accuracy').onclick();assert.equal(app.copied(),app.context.CompanyLessons.accuracyPrompt);app.route('#course/company/1/guide');for(const tool of ['Gemini','Claude','Perplexity'])assert.match(app.node('#tab-content').innerHTML,new RegExp(tool));assert.doesNotMatch(app.node('#tab-content').innerHTML,/PDF \d|원문 기준/);
 });
 test('company grouped writing keeps all six legacy inputs with visual numbering and no autofill',()=>{
  const saved=blankState();saved.worksheets['1-2']={experience:'legacy project only',custom:''};saved.notes['1-2']='legacy memo';const app=boot(saved);app.route('#course/company/2/write');const html=app.node('#tab-content').innerHTML;assert.equal((html.match(/data-field=/g)||[]).length,6);assert.equal((html.match(/class="prompt-group"/g)||[]).length,4);assert.ok(html.indexOf('field-experience')<html.indexOf('field-target'));assert.match(html,/field-number">01<\/span>나의 배경/);assert.equal(app.saved().worksheets['1-2'].experience,'legacy project only');assert.equal(app.saved().worksheets['1-2'].custom,'');assert.equal(app.saved().notes['1-2'],'legacy memo');
+});
+
+test('modification request: saved writing or completion opens the writing tab, while explicit tabs stay explicit',()=>{
+ const data=blankState();data.worksheets['0-1']={target:'작성한 직무',custom:''};data.done['0-0']=true;data.notes['0-2']='저장한 자유 메모';
+ const app=boot(data);
+ for(const index of [0,1,2]){app.route(`#course/ai/${index}`);assert.equal(app.run('selectedTab'),'write');}
+ app.route('#course/ai/1/guide');assert.equal(app.run('selectedTab'),'guide');
+ app.route('#course/ai/1');assert.equal(app.run('selectedTab'),'write');
+ app.route('#course/ai/4');assert.equal(app.run('selectedTab'),'guide');
+ assert.deepEqual(app.saved().worksheets['0-1'],data.worksheets['0-1']);
+});
+test('lower tab buttons reveal lesson content instead of the long contents panel',()=>{
+ const app=boot();app.route('#course/ai/1/guide');const panel=app.node('#lesson-host');
+ app.run("openLessonTab('example')");assert.equal(panel.scrolls.length,0);
+ app.run("openLessonTab('write',{fromBottom:true})");assert.equal(panel.scrolls.length,1);assert.equal(panel.scrolls[0].block,'start');
+ app.run("openLessonTab('guide')");assert.equal(panel.scrolls.length,1);
+});
+test('modification request: external practice retains existing output records and leaves inputs empty for new users',()=>{
+ const app=boot();for(const index of [3,4,5]){app.route(`#course/ai/${index}/write`);const id=`0-${index}`,html=app.node('#tab-content').innerHTML;
+  assert.match(html,/실행한 결과 가져와 기록하기 · 선택/);assert.match(html,/data-copy-practice-field/);
+  for(const [key] of app.context.Workbook.fields(id))assert.equal(app.saved().worksheets[id]?.[key],undefined);
+ }
+ const data=blankState();data.worksheets['0-3']={target:'기존 입력',materials:'기존 설명',instructions:'직접 지침',draft:'기존 요청',finalText:'기존 결과',status:'이전 상태',original:'실제 원문',custom:''};data.notes['0-3']='이전 메모';const saved=boot(data);
+ for(const tab of ['guide','example','write'])saved.route('#course/ai/3/'+tab);
+ assert.deepEqual(saved.saved().worksheets['0-3'],data.worksheets['0-3']);assert.equal(saved.saved().notes['0-3'],'이전 메모');
+});
+
+test('AI preparation requires a nonblank memo and editing revokes completion',()=>{
+ const app=boot();app.route('#course/ai/0/write');const done=app.node('#complete'),note=app.node('#note');
+ assert.equal(done.disabled,true);
+ done.checked=true;done.onchange({target:done});assert.equal(done.checked,false);
+ note.value='   ';note.oninput({target:note});assert.equal(done.disabled,true);
+ note.value='현재 준비 중인 단계와 도움받을 작업';note.oninput({target:note});assert.equal(done.disabled,false);
+ done.checked=true;done.onchange({target:done});assert.equal(app.saved().done['0-0'],true);
+ note.value='';note.oninput({target:note});assert.equal(done.disabled,true);assert.equal(done.checked,false);assert.equal(app.saved().done['0-0'],false);
+});
+
+test('AI instruction examples use the same groups, order and numbering as the writing fields',()=>{
+ const app=boot();app.route('#course/ai/1/write');const writing=app.node('#tab-content').innerHTML;
+ const groups=app.context.Workbook.promptGroups,fields=app.context.Workbook.promptFields;
+ const expected=groups.flatMap(g=>g.keys.map(key=>fields.find(([name])=>name===key)[1]));
+ const rendered=app.run('renderPromptExampleFields(window.LessonExamples.prompts[0].data)');
+ const labels=[...rendered.matchAll(/<dt><span>(\d+)<\/span>(.*?)<\/dt>/g)];
+ assert.deepEqual(labels.map(m=>m[2]),Array.from(expected));
+ assert.deepEqual(labels.map(m=>m[1]),['01','02','03','04','05','06']);
+ const writeLabels=[...writing.matchAll(/<label for="field-[^"]+"><span class="field-number">(\d+)<\/span>(.*?) <span/g)];
+ assert.deepEqual(writeLabels.map(m=>m.slice(1)),labels.map(m=>m.slice(1)));
+ assert.deepEqual([...rendered.matchAll(/<h3>(.*?)<\/h3>/g)].map(m=>m[1]),Array.from(groups,g=>g.title));
+});
+
+test('AI revision comparison examples match their own input placeholders and explain each stage',()=>{
+ const app=boot();app.route('#course/ai/2/write');
+ for(const [key,,help,example] of app.context.Workbook.revisionFields){
+  const html=app.run(`renderFieldExample('${key}','0-2')`);
+  assert.ok(html.includes(app.run(`esc(Workbook.revisionFields.find(f=>f[0]==='${key}')[3])`)),key+' example drift');
+  assert.match(html,/같은 API 오류 응답 협업 사례/);
+ }
+ assert.match(app.run("renderFieldExample('original','0-2')"),/검토할 AI 원문 예시/);
+ assert.doesNotMatch(app.run("renderFieldExample('original','0-2')"),/구체적으로 쓴 예시|이 항목에 알맞은 작성 예시/);
+ assert.match(app.run("renderFieldExample('issues','0-2')"),/문제 표현·이유·수정 방향 예시/);
+});
+
+test('detailed non-AI examples preserve saved records and use the same grouped inputs as the company writing form',()=>{
+ const saved=blankState();saved.worksheets['1-2']={target:'내 직무',experience:'내 경험',custom:''};saved.notes['1-2']='내 메모';
+ const app=boot(saved),before=structuredClone(app.saved().worksheets['1-2']);app.route('#course/company/2/example');
+ const html=app.node('#tab-content').innerHTML,keys=[...html.matchAll(/data-example-field="([^"]+)"/g)].map(m=>m[1]);
+ assert.deepEqual(keys,['experience','target','question','sources','format','rules']);assert.match(html,/예시 입력을 연결한 완성 요청문/);
+ assert.deepEqual(app.saved().worksheets['1-2'],before);assert.equal(app.saved().notes['1-2'],'내 메모');
+ app.route('#course/company/2/write');const write=app.node('#tab-content').innerHTML;assert.deepEqual([...write.matchAll(/data-field="([^"]+)"/g)].map(m=>m[1]),keys);assert.equal(app.node('#prompt-output').value,'');
+});
+test('detailed examples escape field samples, output criteria and assembled prompts',()=>{
+ const app=boot();app.run(`Workbook.fields('3-4').find(f=>f[0]==='context')[3]='</dd><script>sample</script>';PDFContent.lessons['3-4'].output[0]='<script>criterion</script>'`);app.route('#course/portfolio/4/example');
+ const html=app.node('#tab-content').innerHTML;assert.match(html,/&lt;script&gt;sample/);assert.match(html,/&lt;script&gt;criterion/);assert.doesNotMatch(html,/<script>/);
+ assert.equal(app.saved().worksheets['3-4'],undefined);
+});
+
+
+test('category navigation reveals the category title, including saved, repeated and restricted-history navigation',()=>{
+ const data=blankState();data.worksheets['1-0']={target:'기존 작성 내용'};
+ const app=boot(data);app.route('#course/essay/8/write');
+ for(const options of [{category:true},{courseCard:true},{category:true}]){
+  const reveals=app.node('.course-header').scrolls.length;
+  app.context.scrollY=1800;app.clickLink('#course/company/0',options);
+  assert.equal(app.node('.course-header').scrolls.length,reveals+1);
+  assert.equal(app.node('.course-header').focusOptions.preventScroll,true);
+  assert.equal(app.run('currentStep.id'),'1-0');assert.equal(app.run('selectedTab'),'guide');
+  assert.equal(app.context.scrollY,0);assert.equal(app.saved().worksheets['1-0'].target,'기존 작성 내용');
+ }
+ app.context.scrollY=1600;app.clickLink('#home',{category:true});assert.equal(app.context.scrollY,0);
+ app.context.history.pushState=()=>{throw new Error('restricted history');};
+ app.context.scrollY=1800;app.clickLink('#course/company/0',{category:true});
+ const reveals=app.node('.course-header').scrolls.length;app.route(app.context.location.hash);
+ assert.equal(app.node('.course-header').scrolls.length,reveals+1);assert.equal(app.context.scrollY,0);assert.equal(app.run('selectedTab'),'guide');
+});
+
+test('simple library switches between prompts and learning notes without changing saved records',()=>{
+ const data=blankState();data.notes['0-0']='보존할 학습 메모';data.worksheets['1-2']={target:'이전 기업',custom:''};
+ const app=boot(data);app.route('#notes');
+ const before=JSON.stringify(app.saved());
+ app.node('#studio-tab-notes').onclick();assert.equal(app.node('#studio-notes-panel').hidden,false);assert.equal(app.node('#studio-prompt-panel').hidden,true);
+ app.node('#studio-tab-prompts').onclick();assert.equal(app.node('#studio-notes-panel').hidden,true);assert.equal(app.node('#studio-prompt-panel').hidden,false);
+ assert.equal(JSON.stringify(app.saved()),before);
+});
+test('simple editor switches writing and result views without recomposing manual or blank final text',()=>{
+ const data=blankState();data.worksheets['1-2']={target:'기업',custom:''};const app=boot(data);app.route('#compose/company/1-2');
+ const before=JSON.stringify(app.saved().studio.drafts['1-2']);
+ app.node('#studio-preview-mode').onclick();assert.equal(app.node('.studio-compose').dataset.mode,'preview');
+ app.node('#studio-edit-mode').onclick();assert.equal(app.node('.studio-compose').dataset.mode,'edit');
+ assert.equal(JSON.stringify(app.saved().studio.drafts['1-2']),before);assert.equal(app.node('#studio-output').value,'');
+ assert.equal(app.saved().worksheets['1-2'].custom,'');
 });

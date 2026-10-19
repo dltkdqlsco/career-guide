@@ -39,7 +39,7 @@ function roleExamples(){
 }
 function rolePostingReference(){
   const step=allSteps.find(item=>item.id===Workbook.postingId),text=recordText(step);
-  return `<details class="prompt-reference"><summary>7단계 지원 공고·참고 공고 기록 보기 · 읽기 전용</summary><p>필요한 지원 공고 원문과 출처를 아래에 직접 옮기세요. 참고 공고의 내용은 비교 자료로 따로 구분합니다. 7단계 기록은 변경되지 않습니다.</p><pre class="company-reference-text">${esc(text||'아직 저장한 채용 공고 기록이 없습니다. 준비한 공고가 있다면 아래에서 바로 작성할 수 있습니다.')}</pre><a href="#course/company/6/write">7단계 공고 확인 기록 보기 →</a></details>`;
+  return `<details class="prompt-reference"><summary>7단계 지원 공고·참고 공고 기록 보기 · 읽기 전용</summary><p>분석할 지원 공고 내용을 아래에 직접 옮기세요. 참고 공고의 내용은 비교 자료로 따로 구분합니다. 7단계 기록은 변경되지 않습니다.</p><pre class="company-reference-text">${esc(text||'아직 저장한 채용 공고 기록이 없습니다. 준비한 공고가 있다면 아래에서 바로 작성할 수 있습니다.')}</pre><a href="#course/company/6/write">7단계 공고 확인 기록 보기 →</a></details>`;
 }
 function renderCompanyRoleLesson(){
   const id=Workbook.roleId,el=document.querySelector('#tab-content');

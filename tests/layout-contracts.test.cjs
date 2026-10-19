@@ -14,10 +14,13 @@ test('writing grids allow their contents to shrink instead of forcing horizontal
   assert.match(stability,/overflow-wrap:anywhere/);
 });
 
-test('TOC summary can wrap its progress text without floats or overlap',()=>{
-  assert.match(stability,/\.steps-panel>summary\{display:flex;flex-wrap:wrap/);
-  assert.match(stability,/\.steps-panel>summary \.tiny\{float:none/);
-  assert.match(stability,/@media\(max-width:690px\)[\s\S]*\.tiny\{flex-basis:100%/);
+test('always-open TOC and sticky navigation reserve their own space beside the lesson',()=>{
+  const app=fs.readFileSync(path.join(__dirname,'../dist/assets/js/app.js'),'utf8');
+  assert.match(app,/<section class="steps-panel"/);
+  assert.doesNotMatch(app,/<details class="steps-panel"/);
+  assert.match(stability,/grid-template-columns:minmax\(0,1fr\) 210px/);
+  assert.match(stability,/\.course-shortcuts\{[^}]*position:sticky/);
+  assert.match(stability,/\.course-jump\{[^}]*position:sticky/);
 });
 
 test('mobile writing keeps single-column fields and readable non-zoom-triggering textarea text',()=>{

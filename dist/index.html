@@ -8,9 +8,10 @@
   <title>한 걸음 — 나의 취업 준비 워크북</title>
   <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/studio.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <script src="assets/js/viewport.js" defer></script>
-  <script src="assets/js/curriculum.js" defer></script><script src="assets/js/career-data.js" defer></script><script src="assets/js/workbook.js" defer></script><script src="assets/js/backup-core.js" defer></script><script src="assets/js/lessons.js" defer></script><script src="assets/js/examples.js" defer></script><script src="assets/js/company-lessons.js" defer></script><script src="assets/js/company-research.js" defer></script><script src="assets/js/company-analysis.js" defer></script><script src="assets/js/company-verification.js" defer></script><script src="assets/js/company-posting.js" defer></script><script src="assets/js/company-role.js" defer></script><script src="assets/js/backup-ui.js" defer></script><script src="assets/js/finder.js" defer></script><script src="assets/js/career-lessons.js" defer></script><script src="assets/js/app.js" defer></script>
+  <script src="assets/js/curriculum.js" defer></script><script src="assets/js/career-data.js" defer></script><script src="assets/js/workbook.js" defer></script><script src="assets/js/prompt-studio.js" defer></script><script src="assets/js/backup-core.js" defer></script><script src="assets/js/choice-inputs.js" defer></script><script src="assets/js/lessons.js" defer></script><script src="assets/js/examples.js" defer></script><script src="assets/js/company-lessons.js" defer></script><script src="assets/js/company-research.js" defer></script><script src="assets/js/company-analysis.js" defer></script><script src="assets/js/company-verification.js" defer></script><script src="assets/js/company-posting.js" defer></script><script src="assets/js/company-role.js" defer></script><script src="assets/js/backup-ui.js" defer></script><script src="assets/js/finder.js" defer></script><script src="assets/js/career-lessons.js" defer></script><script src="assets/js/pdf-content.js" defer></script><script src="assets/js/studio-ui.js" defer></script><script src="assets/js/studio-editor.js" defer></script><script src="assets/js/app.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">본문으로 이동</a>
@@ -19,13 +20,14 @@
     <a class="brand" href="#home"><span class="brand-symbol">↗</span><span>한 걸음<small>CAREER WORKBOOK</small></span></a>
     <div class="header-actions"><div class="theme-picker"><label class="sr-only" for="theme-select">화면 모드</label><select id="theme-select"><option value="light">화이트 모드</option><option value="dark">다크 모드</option></select></div><span class="save-status" id="save-status" role="status">● 이 기기에 저장</span><a class="secondary" id="backup-link" href="#backup">백업·복원</a><span class="avatar small">나</span></div>
    </div>
-   <nav id="nav" aria-label="가이드 목차"></nav>
   </header>
+  <div class="category-bar"><nav id="nav" aria-label="가이드 목차"></nav></div>
   <div class="layout">
     <div class="topbar"><div id="breadcrumb">나의 워크스페이스 <span>/</span> 전체 가이드</div><span class="preview-label">로컬 작성 · AI API 미연결</span></div>
     <main id="main" tabindex="-1"></main>
     <footer class="footer"><span>한 걸음 · AI 취업 준비 워크북</span><span>당신의 경험이, 당신의 이야기가 되도록.</span></footer>
   </div>
+  <dialog id="studio-profile-dialog" class="studio-profile-dialog" aria-labelledby="studio-profile-title"></dialog>
   <div id="toast" class="toast" role="status"></div>
 </body>
 </html>

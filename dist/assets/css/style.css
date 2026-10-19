@@ -124,3 +124,79 @@ p.sub,.hero p,.tab-content p,.lesson-lead p,.stage-card dd,.case-body>.case-situ
 .badge{font-size:10px}.lesson-badges .badge{font-size:9px}
 .legacy-note>summary{font-size:14px}
 @media(max-width:690px){.brand small{font-size:7px}}
+
+/* Use the available reading width; only authored examples preserve explicit newlines. */
+.tab-content p{max-width:none}
+.steps-panel{scroll-margin-top:155px}
+.practice-form .worksheet-grid{grid-template-columns:minmax(0,1fr)}
+.practice-form{padding:22px 0;border-bottom:1px solid var(--line)}
+.practice-form h3{margin-bottom:15px}.practice-action{font-weight:600}
+.practice-results{margin:25px 0}.practice-copy-actions{margin:20px 0;display:flex;flex-wrap:wrap;gap:10px}
+.prompt-sample{margin:24px 0}.prompt-sample h4{margin-bottom:12px}.prompt-sample .example-block{margin:12px 0}
+.recommended-tools{font-weight:600;color:var(--green)}
+@media(max-width:690px){.steps-panel{scroll-margin-top:145px}}
+
+/* Fill the reading area and keep each copy action inside its input border. */
+.lesson-card h2,.lesson-lead p{max-width:none}
+.tab-content p,.tab-content li,.tab-content dd{word-break:normal;overflow-wrap:anywhere}
+.input-copy{position:relative;min-width:0;width:100%}
+.tab-content .input-copy textarea{width:100%;padding-top:48px}
+.input-copy-button{position:absolute;top:8px;right:8px;font-size:12px;padding:4px 10px;z-index:1}
+
+/* Always-open contents, with a separate sticky rail that never covers the lesson. */
+.steps-heading{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;padding:17px 22px}
+.steps-heading h2{margin:0;padding:0;font-size:14px}.steps-heading .tiny{margin-left:auto}
+.course-shortcuts,.course-jump{display:none}
+#lesson-host{scroll-margin-top:20px}
+@media(min-width:1100px){
+  .course-layout{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:22px 24px;align-items:start}
+  .steps-panel{grid-column:1/-1}
+  .course-layout>.lesson{grid-column:1;grid-row:2}
+  .course-shortcuts{grid-column:2;grid-row:2;display:block;position:sticky;top:20px;align-self:start;max-height:calc(100dvh - 40px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:13px;background:var(--paper,#fff);padding:15px 10px;scrollbar-width:thin}
+  .course-shortcuts h2{font-size:13px;padding:0 9px;margin:0 0 12px}
+  .shortcut-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;padding:10px 9px;border-radius:7px;line-height:1.6;overflow-wrap:anywhere}
+  .shortcut-number{flex-shrink:0;font-size:11px;padding-top:1px}
+  .shortcut-item.active{background:#e7f4fe;color:#246f9d;font-weight:700}
+  .shortcut-item:hover{background:#f2f9ff}
+  .lesson-card{padding:28px}
+  .lesson:not([data-course="ai"]) .worksheet-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:1099px){
+  .course-jump{display:flex;position:sticky;top:0;z-index:10;gap:12px;align-items:center;padding:12px 14px;background:var(--paper,#fff);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  .course-jump label{font-size:12px;white-space:nowrap;flex-shrink:0;font-weight:600}
+  .course-jump select{min-width:0;width:100%;padding:10px 8px;border:1px solid var(--line);border-radius:7px;font:inherit;font-size:16px;color:var(--ink);background:var(--paper,#fff)}
+  #lesson-host{scroll-margin-top:88px}
+  .tab-content :is(textarea,input,select,button){scroll-margin-top:100px}
+}
+@media(max-width:690px){.steps-heading{padding:15px}.steps-heading .tiny{width:100%;margin-left:0}.course-jump{padding:10px;gap:8px}.course-jump label{font-size:11px}}
+
+/* Choose known values; keep prose for the facts and context only. */
+.choice-heading{font-size:13px;font-weight:600;line-height:1.8;margin-bottom:8px}
+.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.choice-control{min-width:0}.choice-control label,.choice-detail-label{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
+.choice-control select,.choice-control input{width:100%;min-width:0;max-width:100%;padding:11px 10px;border:1px solid #cfe4f2;border-radius:8px;background:#fbfdff;color:var(--ink);font:inherit;font-size:13px}
+.choice-control select:focus-visible,.choice-control input:focus-visible{outline:2px solid #2d8bc4;outline-offset:2px}
+.choice-custom:not([hidden]){display:flex;gap:8px;margin-top:8px;align-items:center}.choice-custom input{flex:1;min-width:0}.choice-custom button{flex-shrink:0;padding:9px 12px}
+.choice-tags{list-style:none;padding:0;margin:8px 0 0;display:flex;gap:6px;flex-wrap:wrap}
+.choice-tags li{display:flex;align-items:center;gap:6px;max-width:100%;border:1px solid var(--line);border-radius:6px;padding:4px 7px;font-size:12px;background:#eaf6ff}
+.choice-tags li span{overflow-wrap:anywhere}.choice-tags button{padding:0 4px;border:0;background:transparent;color:inherit;font-size:19px;line-height:1.4;min-width:28px;min-height:28px}
+.choice-field>textarea[hidden]{display:none}.choice-field .choice-detail-label{margin-top:14px}.choice-field [data-choice-detail]{min-height:110px}
+@media(max-width:800px){.choice-control select,.choice-control input{font-size:16px}}
+@media(max-width:480px){.choice-grid{grid-template-columns:minmax(0,1fr)}}
+
+.choice-heading .field-number{margin-right:8px}
+
+
+/* Keep only the category row visible; the branding header scrolls away. */
+:root{--category-nav-height:60px}
+.category-bar{position:sticky;top:0;z-index:30;background:var(--paper,#fff);border-bottom:1px solid var(--line);padding:0 max(24px,calc((100vw - 1260px)/2));box-shadow:0 3px 10px #173e5e08}
+.category-bar #nav{min-height:56px;margin:0;padding:0;overscroll-behavior-x:contain}
+.course-header,#main{scroll-margin-top:calc(var(--category-nav-height) + 16px)}
+#lesson-host{scroll-margin-top:calc(var(--category-nav-height) + 20px)}
+@media(min-width:1100px){.course-shortcuts{top:calc(var(--category-nav-height) + 20px);max-height:calc(100dvh - var(--category-nav-height) - 40px)}}
+@media(max-width:1099px){
+  .course-jump{top:var(--category-nav-height)}
+  #lesson-host{scroll-margin-top:calc(var(--category-nav-height) + 88px)}
+  .tab-content :is(textarea,input,select,button){scroll-margin-top:calc(var(--category-nav-height) + 100px)}
+}
+@media(max-width:690px){.category-bar{padding:0 15px}.category-bar #nav{min-height:50px}}

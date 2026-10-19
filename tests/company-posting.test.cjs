@@ -10,7 +10,7 @@ test('posting completion requires source and original as well as separate requir
   for(const [key] of w.requiredFields(id))assert.match(w.validate(id,{...data,[key]:' '}),/먼저 작성/);
   assert.equal(w.validate(id,{...data,preferred:'공고에 미기재 / 상세 공고 확인 필요'}),'');
   assert.match(w.validate(id,{...data,references:'경력직 공고'}),/적용 한계/);
-  assert.match(w.validate(id,{...data,referenceLimits:'경력 수준 차이'}),/출처와 내용/);
+  assert.match(w.validate(id,{...data,referenceLimits:'경력 수준 차이'}),/참고한 공고의 내용/);
   assert.equal(w.validate(id,{...data,references:'경쟁사 경력직 공고',referenceLimits:'다른 법인·경력 수준. 조사 질문으로만 참고'}),'');
 });
 test('editing requirement classifications never changes the saved original, reference or earlier analysis',()=>{

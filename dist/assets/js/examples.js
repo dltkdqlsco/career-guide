@@ -62,8 +62,8 @@ window.LessonExamples = {
     {
       label:'백엔드 · 자소서',title:'문제 해결 경험을 자기소개서로 정리하기',
       weak:'너는 20년 경력 취업 전문가야. 나를 합격시키는 자소서를 써줘.',
-      data:{target:'신입 백엔드 개발자 / 문제 해결 경험 자기소개서 작성',background:'학력·교육: 컴퓨터공학 전공. 자격: 기술·어학 미취득. Main: Java·Spring API 구현, SQL 조회. Sub: Git 공동 작업.',task:'“어려운 문제를 해결한 경험” 문항에 사용할 글의 개요를 먼저 제안하고, 빠진 정보가 있으면 질문해 주세요.',evidence:'[재사용할 경험]\n프로젝트 1: 주문 서비스 / 담당: 주문 API / 기술: Java·Spring / 문제: API마다 오류 응답 형식이 달라 화면 연동에 혼선 / 행동: 담당 API 응답 정리 → 프론트엔드 담당자와 형식 합의 → 담당 API 수정 / 결과: 화면 연동 테스트 완료 / 근거: API 명세·테스트 기록. 개선율은 미측정.\n프로젝트 2: 스터디 모집 서비스 / 담당: 목록 조회 API·SQL / 문제: 검색 조건이 누락됨 / 행동: 재현 조건 작성·쿼리 수정 / 결과: 해당 조건의 테스트 통과 / 근거: 코드·테스트 기록. 운영 성과는 미측정.\n[이번 자료] 어려운 문제를 해결한 경험과 본인의 행동을 설명해 주세요. 공백 포함 700자 이내.',format:'상황 → 직접 한 행동 → 확인한 결과 순서의 개요. 제가 개요를 확인한 뒤 공백 포함 700자 이내 초안을 작성해 주세요. 간결하고 정중한 문체로 작성하세요.',rules:'제공한 경험만 사용하세요. 팀 전체의 일을 제가 혼자 했다고 표현하지 마세요. 성과 수치와 사용 기술을 추가하지 마세요. 직무명은 문항·공고와, 내 역할·기술·결과는 프로젝트 기록과 대조하세요. 필요한 사실이 없으면 먼저 질문해 주세요.'},
-      why:['“전문가”라는 역할 지정만 있던 요청에 실제 문항과 경험을 더했어요.','개요를 먼저 확인하도록 해 초안이 다른 경험으로 흐르는 것을 점검할 수 있어요.','결과를 과장하지 않도록 측정하지 않은 사실까지 명시했어요.'],
+      data:{target:'신입 백엔드 개발자 / 문제 해결 경험 자기소개서 작성',background:'학력·교육: 컴퓨터공학 전공. 자격: 기술·어학 미취득. Main: Java·Spring API 구현, SQL 조회. Sub: Git 공동 작업.',task:'“어려운 문제를 해결한 경험” 문항의 검토용 초안을 작성해 주세요. 꼭 필요한 사실이 빠져 있으면 작성 전에 질문해 주세요.',evidence:'[재사용할 경험]\n프로젝트 1: 주문 서비스 / 담당: 주문 API / 기술: Java·Spring / 문제: API마다 오류 응답 형식이 달라 화면 연동에 혼선 / 행동: 담당 API 응답 정리 → 프론트엔드 담당자와 형식 합의 → 담당 API 수정 / 결과: 화면 연동 테스트 완료 / 근거: API 명세·테스트 기록. 개선율은 미측정.\n프로젝트 2: 스터디 모집 서비스 / 담당: 목록 조회 API·SQL / 문제: 검색 조건이 누락됨 / 행동: 재현 조건 작성·쿼리 수정 / 결과: 해당 조건의 테스트 통과 / 근거: 코드·테스트 기록. 운영 성과는 미측정.\n[이번 자료] 어려운 문제를 해결한 경험과 본인의 행동을 설명해 주세요. 공백 포함 700자 이내.',format:'상황 → 직접 한 행동 → 확인한 결과 순서로, 공백 포함 700자 이내의 검토용 초안을 작성해 주세요. 간결하고 정중한 문체로 작성하세요.',rules:'제공한 경험만 사용하세요. 팀 전체의 일을 제가 혼자 했다고 표현하지 마세요. 성과 수치와 사용 기술을 추가하지 마세요. 직무명은 문항·공고와, 내 역할·기술·결과는 프로젝트 기록과 대조하세요. 필요한 사실이 없으면 먼저 질문해 주세요.'},
+      why:['“전문가”라는 역할 지정만 있던 요청에 실제 문항과 경험을 더했어요.','검토용 초안의 구성과 분량을 정하고, 사실이 부족하면 먼저 질문하도록 했어요.','결과를 과장하지 않도록 측정하지 않은 사실까지 명시했어요.'],
       adapt:'직무와 문항을 바꾼 뒤, 실제 문제·행동·결과를 채워주세요. 글자 수는 지원 공고에 적힌 기준으로 바꾸세요.'
     },
     {
@@ -137,28 +137,54 @@ window.LessonExamples = {
       adapt:['공고에서 관심이 간 실제 업무 한 가지는 무엇인가요?','그 업무와 닮은 경험이 있나요?','그 경험을 통해 어떤 일을 더 해보고 싶어졌나요?']
     }
   ],
+  revisionHelp: {
+    original:{weakLabel:'원문 대신 감상만 적은 경우',weak:'AI 글이 과장되어 보여요.',goodLabel:'검토할 AI 원문 예시',tip:'AI가 실제로 작성한 문장을 수정하지 않고 붙여 넣습니다. 아래 원문에 있는 과장·허위 표현은 다음 항목에서 짚습니다. 이 예시의 지원자는 API 응답 형식을 정리하고 합의했으며, 리더 역할이나 생산성 측정은 하지 않았습니다.'},
+    issues:{weakLabel:'문제와 이유가 불분명한 경우',weak:'전체적으로 어색하니 자연스럽게 고치면 좋겠어요.',goodLabel:'문제 표현·이유·수정 방향 예시',tip:'앞 칸의 표현을 직접 인용하고 실제 경험과 다른 이유를 적습니다. 수정 방향은 확인한 행동으로 정하세요. 고칠 점이 없다면 무엇을 대조했고 왜 그대로 쓸 수 있는지 적습니다.'},
+    facts:{weakLabel:'내 행동과 근거가 빠진 경우',weak:'팀원들과 협업해서 좋은 결과를 냈습니다.',goodLabel:'실제 상황·내 행동·결과와 근거 예시',tip:'AI 원문을 다시 꾸미지 말고 실제로 한 일을 적습니다. 팀 전체의 일과 내 역할을 구분하고 결과를 대조한 자료를 남기세요. 측정하지 않은 수치는 추가하지 않습니다.'},
+    revised:{weakLabel:'추상적인 표현만 바꾼 경우',weak:'우수한 협업 능력으로 팀에 크게 기여했습니다.',goodLabel:'확인한 사실을 내 말로 쓴 수정본 예시',tip:'앞에서 확인한 행동과 결과로 문장을 다시 씁니다. 허위 역할·수치를 빼고 내가 평소 설명할 수 있는 말투인지 소리 내어 읽으세요. 새 경험이나 성과를 덧붙이지 않습니다.'}
+  },
   fieldHelp: {
     target:{weak:'취업 준비',good:'신입 프론트엔드 개발자 / 프로젝트 포트폴리오 작성',tip:'희망 직무와 지금 만들 결과물을 함께 적으면 요청 범위가 분명해져요.'},
     background:{weak:'열심히 하는 개발자입니다.',good:'React를 학습했고, 팀 프로젝트에서 모집 글 목록과 검색 화면을 담당했습니다.',tip:'성격 평가보다 이번 작업을 이해하는 데 필요한 배경과 담당 경험을 적어보세요.'},
     task:{weak:'잘 써주세요.',good:'검색 기능의 문제 해결 과정을 정리하고, 설명이 부족한 부분은 먼저 질문해 주세요.',tip:'AI가 수행할 행동을 “정리하기 / 비교하기 / 질문하기 / 검토하기”처럼 구체화하세요.'},
     evidence:{weak:'프로젝트를 성공적으로 했습니다.',good:'문제: 입력할 때마다 검색 요청 발생\n행동: 디바운스 적용\n확인: 개발 환경 네트워크 패널에서 요청 시점 확인\n미확인: 실제 사용자 환경의 개선율',tip:'관찰한 문제, 직접 한 행동, 확인한 결과, 모르는 부분을 나누어 적어보세요.'},
-    format:{weak:'깔끔하게 써주세요.',good:'문제 / 담당 범위 / 구현 / 확인 / 한계의 5개 소제목으로, 각 1~2문장씩 작성해 주세요.',tip:'결과물의 순서와 길이를 정하세요. 자기소개서라면 실제 문항의 글자 수를 적어주세요.'},
+    format:{weak:'깔끔하게 써주세요.',good:'문제\n담당 범위\n구현\n확인\n한계\n위 5개 소제목으로 나누어 각 1~2문장씩 작성해 주세요.',tip:'결과물의 순서와 길이를 정하세요. 자기소개서라면 실제 문항의 글자 수를 적어주세요.'},
     rules:{weak:'완벽하고 설득력 있게 써주세요.',good:'제공하지 않은 경험·기술·성과 수치를 만들지 마세요. 정보가 부족하면 먼저 질문하고, 확인한 사실과 추정을 구분해 주세요.',tip:'좋은 결과에 대한 막연한 기대보다, 반드시 지켜야 할 기준을 적어보세요.'},
-    original:{weak:'AI 글이 좀 어색해요.',good:'탁월한 협업 능력과 리더십으로 팀 전체의 생산성을 50% 향상시켰습니다.',tip:'문제를 찾아볼 수 있도록 AI가 쓴 실제 문장 전체를 붙여 넣으세요. 위 문장은 가상 예시예요.'},
-    issues:{weak:'과장된 것 같아요.',good:'리더 역할을 하지 않았고, 생산성 50%를 측정한 적이 없습니다. 실제로 한 행동도 문장에 빠져 있습니다.',tip:'사실과 다른 표현과 설명이 부족한 표현을 각각 찾아보세요.'},
-    facts:{weak:'팀원들과 잘 협업했어요.',good:'API 오류 응답을 문서로 정리하고 프론트엔드 담당자와 공통 형식을 합의했습니다. 담당 API 수정 후 화면 연동을 테스트했습니다.',tip:'행동을 보여주는 동사와 직접 확인한 결과를 적어주세요. 수치가 없다면 억지로 만들 필요가 없어요.'},
-    revised:{weak:'뛰어난 협업으로 좋은 결과를 냈습니다.',good:'담당 API의 오류 응답을 정리하고 프론트엔드 담당자와 공통 형식을 합의했습니다. 이후 담당 API를 수정하고 화면과의 연동을 테스트했습니다.',tip:'앞에서 적은 사실만 사용하세요. 자신의 입으로 설명할 수 있는 문장인지 읽어보세요.'}
+
   }
 };
 
-function renderFieldExample(key,id='0-1'){if(window.CareerLessons?.lessons[id])return '';const x=id.startsWith('1-')?window.CompanyLessons.fieldHelp[id]?.[key]:window.LessonExamples.fieldHelp[key];return x?`<details class="field-example"><summary>어떻게 쓰나요? · 예시 비교</summary><div><span class="mini-label">정보가 부족한 예시</span><pre>${esc(x.weak)}</pre><span class="mini-label">구체적으로 쓴 예시</span><pre>${esc(x.good)}</pre><p>${esc(x.tip)}</p><small>가상 예시입니다. 자신의 실제 정보로 바꿔 쓰세요.</small></div></details>`:'';}
+// Format authored sample separators as real line breaks; never rewrite saved user text.
+for(const sample of window.LessonExamples.prompts)for(const key of Object.keys(sample.data)){
+  const lines=sample.data[key].replace(/ +\/ +/g,'\n').split('\n');
+  let project=false;
+  sample.data[key]=lines.map(line=>{
+    if(/^프로젝트 \d+:/.test(line)){project=true;return line;}
+    if(/^\[/.test(line))project=false;
+    return project?'  '+line:line;
+  }).join('\n');
+}
+function renderRevisionFieldExample(key){
+  const help=window.LessonExamples.revisionHelp[key];
+  const field=Workbook.revisionFields.find(([name])=>name===key);
+  if(!help||!field)return '';
+  return `<details class="field-example"><summary>어떻게 쓰나요? · 예시 비교</summary><div><span class="mini-label">${esc(help.weakLabel)}</span><pre>${esc(help.weak)}</pre><span class="mini-label">${esc(help.goodLabel)}</span><pre>${esc(field[3])}</pre><p>${esc(help.tip)}</p><small>같은 API 오류 응답 협업 사례를 네 항목에 이어 쓴 가상 예시입니다. 자신의 실제 원문과 경험으로 바꿔 쓰세요.</small></div></details>`;
+}
+function renderFieldExample(key,id='0-1'){if(id==='0-2')return renderRevisionFieldExample(key);if(window.CareerLessons?.lessons[id])return '';const x=id.startsWith('1-')?window.CompanyLessons.fieldHelp[id]?.[key]:window.LessonExamples.fieldHelp[key];return x?`<details class="field-example"><summary>어떻게 쓰나요? · 예시 비교</summary><div><span class="mini-label">${id==='0-2'?'피할 작성 방식':'정보가 부족한 예시'}</span><pre>${esc(x.weak)}</pre><span class="mini-label">${id==='0-2'?'이 항목에 알맞은 작성 예시':'구체적으로 쓴 예시'}</span><pre>${esc(x.good)}</pre><p>${esc(x.tip)}</p><small>가상 예시입니다. 자신의 실제 정보로 바꿔 쓰세요.</small></div></details>`:'';}
 function exampleDetail(index,title,body){return `<details class="example-case" ${index===0?'open':''}><summary><span class="case-no">${String(index+1).padStart(2,'0')}</span><span>${esc(title)}</span><span class="case-toggle" aria-hidden="true">＋</span></summary><div class="case-body">${body}</div></details>`;}
 function examplePoints(items){return `<ul class="example-points">${items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;}
+function renderPromptExampleFields(data){
+  let number=0;
+  return Workbook.promptGroups.map(group=>`<section class="prompt-group"><h3>${esc(group.title)}</h3><p>${esc(group.help)}</p><dl class="example-fields">${group.keys.map(key=>{
+    const [,label]=Workbook.promptFields.find(([name])=>name===key);
+    return `<div><dt><span>${String(++number).padStart(2,'0')}</span>${esc(label)}</dt><dd>${formatExampleText(data[key])}</dd></div>`;
+  }).join('')}</dl></section>`).join('');
+}
 function renderExampleGallery(id){
   const x=window.LessonExamples;
   const note='<div class="tip-box example-disclosure">아래 내용은 학습을 위해 만든 가상 사례입니다. 자신의 경험과 확인한 사실로 바꿔 작성하세요.</div>';
-  if(id==='0-0')return `<div class="gallery-heading"><h3>같은 AI도 준비 단계에 따라 다르게 요청해 보세요.</h3><span class="badge">${x.stages.length}가지 활용 상황</span></div><p>각 사례에서 준비 자료 → 요청 → 결과의 모양 → 내 확인 순서를 살펴보세요.</p>${note}<div class="example-gallery">${x.stages.map((c,i)=>exampleDetail(i,c.label+' · '+c.title,`<p class="case-situation">${esc(c.situation)}</p><h4>먼저 준비한 자료</h4>${examplePoints(c.facts)}<div class="comparison"><article class="before"><span class="eyebrow">부족한 요청</span><p>${esc(c.weak)}</p></article><article class="after"><span class="eyebrow">구체적인 요청</span><pre>${esc(c.strong)}</pre></article></div><h4>나와야 할 결과의 모양</h4><div class="example-block"><pre>${esc(c.result)}</pre></div><h4>무엇이 좋아졌나요?</h4>${examplePoints(c.why)}<div class="check-note"><strong>결과를 받으면 확인하세요</strong><p>${esc(c.check)}</p></div><div class="adapt-note"><strong>내 경험에 적용하기</strong><p>${esc(c.adapt)}</p></div>`)).join('')}</div><div class="next-action">${lessonButton('내 준비 메모하기','write')}<a class="secondary" href="#course/ai/1">지침 프롬프트 만들기 →</a></div>`;
-  if(id==='0-1')return `<div class="gallery-heading"><h3>재사용할 내 정보와 이번 작업을 함께 정리해 보세요.</h3><span class="badge">3가지 완성 사례</span></div><p>직무별 여섯 입력칸을 나의 정보 · 해결할 문제 · 출력 방법 · 마무리로 조합한 예시입니다. 배경과 경험을 재사용하고, 지원 대상·요청·출력 조건을 바꿔 활용하세요.</p>${note}<div class="example-gallery">${x.prompts.map((c,i)=>exampleDetail(i,c.label+' · '+c.title,`<div class="weak-prompt"><span class="eyebrow">이 요청만으로는 정보가 부족해요</span><p>${esc(c.weak)}</p></div><h4>여섯 입력칸은 이렇게 채웁니다</h4><dl class="example-fields">${Workbook.promptFields.map(([key,label],j)=>`<div><dt><span>${j+1}</span>${esc(label)}</dt><dd>${esc(c.data[key])}</dd></div>`).join('')}</dl><details class="full-prompt"><summary>이 입력을 연결한 완성 프롬프트 보기</summary><div class="example-block"><pre>${esc(Workbook.compose(c.data))}</pre></div></details><h4>무엇이 좋아졌나요?</h4>${examplePoints(c.why)}<div class="adapt-note"><strong>내 정보로 바꿀 부분</strong><p>${esc(c.adapt)}</p></div>${lessonButton('내 프롬프트 작성하기','write')}`)).join('')}</div>`;
-  if(id==='0-2')return `<div class="gallery-heading"><h3>어떤 부분을 왜 고치는지, 유형별로 비교해 보세요.</h3><span class="badge">${x.revisions.length}가지 수정 사례</span></div><p>같은 사실을 과장 없이 표현하는 연습입니다. 좋은 문장의 모양뿐 아니라, 고칠 표현을 찾는 과정도 확인하세요.</p>${note}<div class="example-gallery">${x.revisions.map((c,i)=>exampleDetail(i,c.label+' · '+c.title,`<div class="fact-card"><strong>이 사례에서 실제로 주어진 사실</strong><p>${esc(c.facts)}</p></div><div class="comparison"><article class="before"><span class="eyebrow">수정 전</span><p>${esc(c.before)}</p></article><article class="after"><span class="eyebrow">수정 후</span><p>${esc(c.after)}</p></article></div><h4>먼저 찾은 문제</h4>${examplePoints(c.issues)}<h4>수정의 핵심</h4><p>${esc(c.why)}</p><div class="adapt-note"><strong>내 글을 고칠 때 답해볼 질문</strong>${examplePoints(c.adapt)}</div>${lessonButton('내 문장 고쳐보기','write')}`)).join('')}</div>`;
+  if(id==='0-0')return `<div class="gallery-heading"><h3>같은 AI도 준비 단계에 따라 다르게 요청해 보세요.</h3><span class="badge">${x.stages.length}가지 활용 상황</span></div><p>각 사례에서 준비 자료 → 요청 → 결과의 모양 → 내 확인 순서를 살펴보세요.</p>${note}<div class="example-gallery">${x.stages.map((c,i)=>exampleDetail(i,c.label+' · '+c.title,`<p class="case-situation">${esc(c.situation)}</p><h4>먼저 준비한 자료</h4>${examplePoints(c.facts)}<div class="comparison"><article class="before"><span class="eyebrow">부족한 요청</span><p>${esc(c.weak)}</p></article><article class="after"><span class="eyebrow">구체적인 요청</span><pre>${formatExampleText(c.strong)}</pre></article></div><h4>나와야 할 결과의 모양</h4><div class="example-block"><pre>${formatExampleText(c.result)}</pre></div><h4>무엇이 좋아졌나요?</h4>${examplePoints(c.why)}<div class="check-note"><strong>결과를 받으면 확인하세요</strong><p>${esc(c.check)}</p></div><div class="adapt-note"><strong>내 경험에 적용하기</strong><p>${esc(c.adapt)}</p></div>`)).join('')}</div><div class="next-action">${lessonButton('내 준비 메모하기','write')}<a class="secondary" href="#course/ai/1">지침 프롬프트 만들기 →</a></div>`;
+  if(id==='0-1')return `<div class="gallery-heading"><h3>재사용할 내 정보와 이번 작업을 함께 정리해 보세요.</h3><span class="badge">3가지 완성 사례</span></div><p>직무별 여섯 입력칸을 나의 정보 · 해결할 문제 · 출력 방법 · 마무리로 조합한 예시입니다. 배경과 경험을 재사용하고, 지원 대상·요청·출력 조건을 바꿔 활용하세요.</p>${note}<div class="example-gallery">${x.prompts.map((c,i)=>exampleDetail(i,c.label+' · '+c.title,`<div class="weak-prompt"><span class="eyebrow">이 요청만으로는 정보가 부족해요</span><p>${esc(c.weak)}</p></div><h4>작성 공간과 같은 순서로 살펴보세요</h4>${renderPromptExampleFields(c.data)}<details class="full-prompt"><summary>이 입력을 연결한 완성 프롬프트 보기</summary><div class="example-block"><pre>${esc(Workbook.compose(c.data))}</pre></div></details><h4>무엇이 좋아졌나요?</h4>${examplePoints(c.why)}<div class="adapt-note"><strong>내 정보로 바꿀 부분</strong><p>${esc(c.adapt)}</p></div>${lessonButton('내 프롬프트 작성하기','write')}`)).join('')}</div>`;
+  if(id==='0-2')return `<div class="gallery-heading"><h3>두 번에 나누어 요청하며 내 말투로 다듬어 보세요.</h3></div><p>먼저 작성한 자기소개서·답변 스크립트를 붙여 넣고 표현을 살펴봅니다. 이어서 같은 대화에서 내 말투 특징을 알려 주며 다시 수정합니다.</p>${renderPromptSamples(revisionPromptSamples)}<div class="next-action">${lessonButton('내 초안 다듬기','write')}</div>`;
   return '';
 }

@@ -22,6 +22,9 @@ python3 -m http.server 4175 --bind 127.0.0.1 --directory dist
 | IT 포트폴리오 | 10 | 필요 역량·기술·프로젝트·성과·회고, 양식 선택, Canva·Notion 제작 준비 |
 | 면접 | 9 | 직무·임원 질문·답변·보완, 음성·영상·싸피엔스 모의 면접 준비와 기록 |
 
+- **공통 프로필·공통 AI 설정**을 등록하고 작업마다 필요한 항목만 선택해 재사용.
+- **프롬프트 편집**에서 항목 포함/제외·추가·순서·문구 수정과 미리보기·최종 편집.
+- **내 메모·프롬프트 보관함**에서 폴더 관리, 여러 저장본의 검색·수정·이동·복제·재사용. 기존 학습 기록도 유지.
 - 설명·가상 예시·작성 공간, 자동 저장, 완료 표시·진행률, 목차 검색, 기록 복사와 모아보기.
 - JSON 전체 백업·미리보기·단계별 선택 복원·불러오기 직전 보호본, 읽기용 Markdown 내보내기.
 - 작성 변경 시 완료·최종 확인 해제, 직접 수정하거나 비워 둔 요청문 및 기존 자유 메모 보존.
@@ -35,7 +38,15 @@ python3 -m http.server 4175 --bind 127.0.0.1 --directory dist
 
 ## 검증과 문서
 
-전체 자동 검사 **462개**, JavaScript **18개** 문법 검사를 통과했습니다. 전체 목차 화면, 모바일 배치, 모드 선택과 기록 보존, 단계별 작성·복사·백업·복원을 검증했습니다. 추가로 Chromium의 데스크톱·터치 세로/가로·로컬 파일 직접 실행에서 입력·저장·백업·복원을 확인했습니다. Safari는 원격 자동화 비활성화로 실행하지 못했으며, 실제 휴대전화·OS 한글 입력기는 미검증입니다. [최종 사용성 추가 검증](resources/md/reviews/final-usability-review.md)을 확인하세요. PDF 5종·128쪽과 45개 목차의 핵심 내용도 대조해 안내 2곳을 보완했습니다. [전체 PDF 내용 대조 보고서](resources/md/reviews/full-pdf-content-audit.md)에 원문과 다른 처리·미확인 범위를 기록했습니다. 구체적인 범위와 미검증 항목은 [문서 목차](resources/md/README.md)와 각 보고서를 확인하세요.
+홈의 **내 정보 선택하기**에서 화면 이동 없이 기본 정보를 선택합니다. 프롬프트는 **작성하기 → 결과·저장**으로 진행하고, 보관함은 **프롬프트 / 학습 메모**로 나누었습니다. [화면 단순화 결과](resources/md/modifications/simplification-implementation.md)를 확인하세요.
+
+[공통 정보·프롬프트 관리 구현 결과](resources/md/modifications/prompt-studio-implementation.md)에 사용 경로와 저장·백업 범위를 정리했습니다. 새 공통 정보는 JSON 백업 버전 2에 포함되며, 기존 버전 1 파일도 계속 복원할 수 있습니다.
+
+업종·직종·전공·주 언어·기술 스택 등은 선택형 입력을 제공하며, 세부 목차는 항상 표시합니다. 데스크톱에서는 본문 옆 목차로, 좁은 화면에서는 상단 단계 선택으로 이동할 수 있습니다. [입력·목차 개선 결과](resources/md/modifications/structure-and-select-inputs.md)를 확인하세요.
+
+AI 활용법은 확정된 내용을 유지하고, 나머지 4개 가이드·39개 단계의 설명·예시·작성칸·완성 요청문을 PDF와 2차 대조했습니다. 작성칸별 입력 예시와 상세 출력·검토 기준도 보강했습니다. [2차 검토 결과](resources/md/modifications/non-ai-pdf-second-pass.md)를 확인하세요. 출처·주소 입력 요구와 학습 화면의 외부 링크를 제거했습니다. [수정 범위·원문 대응·검증 결과](resources/md/modifications/non-ai-pdf-first-pass.md)를 확인하세요.
+
+전체 자동 검사 **501개**, JavaScript **23개** 문법 검사를 통과했습니다. 전체 목차 화면, 모바일 배치, 모드 선택과 기록 보존, 단계별 작성·복사·백업·복원을 검증했습니다. 추가로 Chromium의 데스크톱·터치 세로/가로·로컬 파일 직접 실행에서 입력·저장·백업·복원을 확인했습니다. Safari는 원격 자동화 비활성화로 실행하지 못했으며, 실제 휴대전화·OS 한글 입력기는 미검증입니다. [최종 사용성 추가 검증](resources/md/reviews/final-usability-review.md)을 확인하세요. PDF 5종·128쪽과 45개 목차의 핵심 내용도 대조해 안내 2곳을 보완했습니다. [전체 PDF 내용 대조 보고서](resources/md/reviews/full-pdf-content-audit.md)에 원문과 다른 처리·미확인 범위를 기록했습니다. 구체적인 범위와 미검증 항목은 [문서 목차](resources/md/README.md)와 각 보고서를 확인하세요.
 
 ```sh
 node --test tests/*.test.cjs
@@ -58,7 +69,7 @@ career-guide/
 ├── dist/                         웹 실행·배포 파일
 │   ├── index.html                워크북 실행 진입점
 │   └── assets/
-│       ├── js/                   JavaScript 18개
+│       ├── js/                   JavaScript 23개
 │       └── css/                  본문·화면 모드 스타일
 ├── resources/                    기존 output: 참고 자료·문서
 │   ├── md/                       작업 문서 목차와 주제별 Markdown
